@@ -54,14 +54,22 @@ export default function Home() {
           </a>
         </div>
 
-        {!session && <>
-          Not signed in <br/>
-          <button onClick={() => signIn()}>Sign in</button>
-        </>}
-        {session && <>
-          Signed in as {session.user.email} <br/>
-          <button onClick={() => signOut()}>Sign out</button>
-        </>}
+        {!session && (
+          <>
+            Not signed in <br />
+            <button onClick={signIn}>Sign In</button>
+          </>
+        )}
+        {session && (
+          <>
+            Signed in as {session.user.email} <br />
+            <div>You can now access your profile</div>
+            <button>
+              <Link href="/profile">To profile</Link>
+            </button>
+            <button onClick={signOut}>sign out</button>
+          </>
+        )}
       </main>
 
       <footer>
