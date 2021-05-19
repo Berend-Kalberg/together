@@ -1,20 +1,27 @@
+// Pages/index.js
+
 import Head from 'next/head'
+import { signIn, signOut, useSession } from 'next-auth/client'
+import React from 'react'
+import Link from 'next/link'
 
 export default function Home() {
+  const [ session, loading ] = useSession()
+
   return (
     <div className="container">
       <Head>
-        <title>Create Next App</title>
+        <title>Together</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <main>
         <h1 className="title">
-          Learn <a href="https://nextjs.org">Next.js!</a>
+          Use <a href="https://nextjs.org">Together</a>
         </h1>
 
         <p className="description">
-          Get started by editing <code>pages/index.js</code>
+          Get started by logging in!
         </p>
 
         <div className="grid">
@@ -46,6 +53,15 @@ export default function Home() {
             </p>
           </a>
         </div>
+
+        {!session && <>
+          Not signed in <br/>
+          <button onClick={() => signIn()}>Sign in</button>
+        </>}
+        {session && <>
+          Signed in as {session.user.email} <br/>
+          <button onClick={() => signOut()}>Sign out</button>
+        </>}
       </main>
 
       <footer>
@@ -54,7 +70,7 @@ export default function Home() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Powered by{' '}
+          Created by{' '}
           <img src="/vercel.svg" alt="Vercel Logo" className="logo" />
         </a>
       </footer>
