@@ -1,8 +1,7 @@
-import NextAuth from 'next-auth'
-import Providers from 'next-auth/providers'
+import NextAuth from "next-auth";
+import Providers from "next-auth/providers";
 
 const options = {
-  // Configure one or more authentication providers
   providers: [
     Providers.Auth0({
       clientId: process.env.AUTH0_CLIENT_ID,
@@ -21,11 +20,14 @@ const options = {
     //   from: process.env.EMAIL_FROM,
     // }),
   ],
+  pages: {
+    signIn: "/signin",
+  },
   database: {
     type: "sqlite",
     database: ":memory:",
     synchronize: true,
   },
-}
+};
 
-export default (req, res) => NextAuth(req, res, options)
+export default (req, res) => NextAuth(req, res, options);
