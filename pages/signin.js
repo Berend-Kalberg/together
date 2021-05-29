@@ -1,16 +1,18 @@
 import React from "react";
-import { providers, signIn, getSession, csrfToken } from "next-auth/client";
+import Head from "next/head";
 
-export default function SignIn({ providers, csrfToken }) {
+import { providers, signIn, getSession } from "next-auth/client";
+
+export default function SignIn({ providers }) {
   return (
-    <div maxW="xl" centerContent>
-      <h1 as="h1" textAlign="center">
+    <div>
+      <Head>
+        <title>Together</title>
+      </Head>
+      <h1>
         Welcome to our custom page
       </h1>
         {Object.values(providers).map((provider) => {
-          if (provider.name === "Email") {
-            return;
-          }
           return (
             <div key={provider.name}>
               <button variant="outline" onClick={() => signIn(provider.id)}>
@@ -32,12 +34,12 @@ SignIn.getInitialProps = async (context) => {
       Location: "/",
     });
     res.end();
+    console.log(res)
     return;
   }
 
   return {
     session: undefined,
     providers: await providers(context),
-    csrfToken: await csrfToken(context),
   };
 };
