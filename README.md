@@ -1,1 +1,1 @@
-This is a starter template for [Learn Next.js](https://nextjs.org/learn).
+Together is a new platform created for doing more activities together. Currently it is all about finding games to play together with friends!
