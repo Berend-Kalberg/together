@@ -6,7 +6,7 @@ const options = {
     Providers.Auth0({
       clientId: process.env.AUTH0_CLIENT_ID,
       clientSecret: process.env.AUTH0_CLIENT_SECRET,
-      domain: process.env.AUTH0_DOMAIN,
+      domain: process.env.AUTH0_ISSUER_BASE_URL,
     }),
     // Providers.Email({
     //   server: {
@@ -20,9 +20,9 @@ const options = {
     //   from: process.env.EMAIL_FROM,
     // }),
   ],
-  pages: {
-    signIn: "/signin",
-  },
+  // pages: {
+  //   signIn: "/signin",
+  // },
   database: {
     type: "sqlite",
     database: ":memory:",
