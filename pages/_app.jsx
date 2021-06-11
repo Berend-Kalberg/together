@@ -1,5 +1,7 @@
 import React from 'react';
 import { UserProvider } from '@auth0/nextjs-auth0';
+require('dotenv').config()
+
 
 import Layout from '../components/Layout';
 
