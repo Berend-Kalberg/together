@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Loading = () => (
-  <div className="spinner d-flex align-items-center justify-content-center w-100 h-100" data-testid="loading">
+  <div className="flex items-center justify-center h-screen spinner d-flex align-items-center justify-content-center w-100 h-100" data-testid="loading">
     <svg
       xmlns="http://www.w3.org/2000/svg"
       width="120"

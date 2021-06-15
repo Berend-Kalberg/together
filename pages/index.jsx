@@ -8,7 +8,7 @@ export default function Index() {
           <h1 className="my-4 text-3xl md:text-5xl text-purple-800 font-bold leading-tight text-center md:text-left slide-in-bottom-h1">
             Do more. Together
           </h1>
-          <p className="leading-normal text-base md:text-2xl mb-8 text-center md:text-left slide-in-bottom-subtitle">
+          <p className="leading-normal text-base md:text-2xl text-gray-700 mb-8 text-center md:text-left slide-in-bottom-subtitle">
             Create your own profile and select some movies. Add a connection and see new recommendations!
           </p>
         </div>

@@ -4,13 +4,12 @@ import Image from 'next/image';
 const MovieList = props => {
   const FavouriteComponent = props.favouriteComponent;
   const posterUrl = 'https://image.tmdb.org/t/p/w600_and_h900_bestv2/';
-  // const posterPath = movie.poster_path
 
   return (
     <>
       {props.movies.map((movie, index) => (
-        <div key={index} className="w-full lg:max-w-full py-6 lg:flex">
-          <div className="h-48 border-gray-400 border lg:h-auto lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden">
+        <div key={index} className="w-full md:max-w-full py-6 md:flex">
+          <div className="sm:h-auto border-gray-400 border sm:w-48 flex-none bg-cover rounded-t lg:rounded-t-none md:rounded-l text-center overflow-hidden">
             {movie.poster_path && <img src={posterUrl + movie.poster_path} alt="movie poster"></img>}
             {!movie.poster_path && (
               <Image src="/poster-not-available.png" alt="default movie poster" width={600} height={900} />

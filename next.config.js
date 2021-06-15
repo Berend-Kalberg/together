@@ -5,7 +5,8 @@ module.exports = {
       config.node = {
         fs: 'empty',
         tls: 'empty',
-        net: 'empty'
+        net: 'empty',
+        dns: 'empty'
       }
     }
 
