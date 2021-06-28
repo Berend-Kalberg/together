@@ -1,60 +1,79 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useUser, withPageAuthRequired } from '@auth0/nextjs-auth0';
+
+import users from './data/users.json';
+
+import SearchBox from '../components/SearchBox';
 
 import Loading from '../components/Loading';
 
 function Profile() {
   const { user, isLoading } = useUser();
+  const [searchValue, setSearchValue] = useState('');
+  // const [connectionCode, setConnectionCode] = useState([]);
 
-  const request = require('request');
+  const connectionCode = [];
 
-  const token = process.env.NEXT_PUBLIC_AUTH0_ACCESS_TOKEN;
+  if (user.email === 'berend.kalberg@gmail.com') {
+    connectionCode.push(users[1].app_metadata.connection_code);
+  } else if (user.email === 'berend.kalberg@hotmail.com') {
+    connectionCode.push(users[0].app_metadata.connection_code);
+  } else {
+    connectionCode.push(makeid(9));
+  }
 
-  // let EventEmitter = require('events').EventEmitter;
-  // let body = new EventEmitter();
+  function makeid(length) {
+    var result = [];
+    var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var charactersLength = characters.length;
+    for (var i = 0; i < length; i++) {
+      result.push(characters.charAt(Math.floor(Math.random() * charactersLength)));
+    }
+    return result.join('');
+  }
 
-  // let headers = {
-  //   Authorization: 'Bearer ' + token
-  // };
-  // let options = {
-  //   url: `https://together-app.eu.auth0.com/api/v2/users?q=${user.email}`,
-  //   headers: headers
-  // };
-  // function callback(error, response, result) {
-  //   if (!error && response.statusCode == 200) {
-  //     body.data = result;
-  //     body.emit('update');
-  //   }
-  // }
-  // request(options, callback);
-
-  // body.on('update', function () {
-  //   console.log(body.data);
-  // });
-
-  let arr = [];
-
-  const getUser = async () => {
-    const url = `https://together-app.eu.auth0.com/api/v2/users?q=${user.email}`;
-
-    const response = await fetch(url, {
-      headers: {
-        Authentication: token
-      }
-    });
-    const responseJson = await response.json();
-
-    console.log(response, responseJson);
-
-    if (responseJson.results) {
-      console.log(responseJson.results);
-      arr.push(responseJson.results);
+  const getUserData = async searchValue => {
+    if (!searchValue && searchValue === users[1].app_metadata.connection_code) {
+      console.log;
+    } else if (!searchValue && searchValue === users[0].app_metadata.connection_code) {
+      console.log();
     }
   };
 
-  getUser();
+  useEffect(() => {
+    getUserData(searchValue);
+  }, [searchValue]);
 
-  console.log(arr);
+  
+  // useEffect(() => {
+  //   const connectionCodes = localStorage.getItem('connection-code');
+
+  //   console.log(connectionCodes);
+  //   if (connectionCodes && user.email === 'berend.kalberg@gmail.com') {
+  //     console.log(user.email)
+  //     setConnectionCode(connectionCodes);
+  //   } else if (user.email != 'berend.kalberg@gmail.com') {
+  //     addConnectionCode(newCode);
+  //   } else {
+  //     addConnectionCode(newCode);
+  //   }
+  // }, []);
+
+  // const saveToLocalStorage = code => {
+  //   localStorage.setItem('connection-code', code);
+  // };
+
+  // const addConnectionCode = code => {
+  //   const newConnectionCode = [...connectionCode, code];
+
+  //   if (newConnectionCode.length <= 1) {
+  //     setConnectionCode(newConnectionCode);
+  //     saveToLocalStorage(newConnectionCode);
+  //     console.log(newConnectionCode);
+  //   } else {
+  //     console.log('');
+  //   }
+  // };
 
   return (
     <>
@@ -64,15 +83,14 @@ function Profile() {
           <div className="container pt-24 md:pt-48 px-6 mx-auto flex flex-wrap flex-col md:flex-row items-center">
             <div className="flex flex-col w-full xl:w-4/5 justify-center lg:items-start overflow-y-hidden">
               <h1 className="my-4 text-3xl md:text-5xl text-purple-800 font-bold leading-tight text-center md:text-left slide-in-bottom-h1">
-                Profile
+                Your Profile
               </h1>
               <p className="leading-normal text-base md:text-2xl text-gray-700 mb-8 text-center md:text-left slide-in-bottom-subtitle">
-                Welcome {user.name}, here is your profile data:
+                Welcome {user.name}!
               </p>
               <p className="leading-normal text-base md:text-2xl text-gray-700 mb-8 text-center md:text-left slide-in-bottom-subtitle">
-                <span className="font-bold">Connection Code:</span>
+                <span className="font-bold">Your connection code:</span> {connectionCode}
                 <br></br>
-                <span className="font-bold">Name:</span> {user.name} <br></br>
                 <span className="font-bold">Email:</span> {user.email} <br></br>
                 <span className="font-bold">Username:</span> {user.nickname} <br></br>
                 <span className="font-bold">Social:</span> {user.sub}
@@ -85,11 +103,29 @@ function Profile() {
 
             <div className="flex flex-col w-full xl:w-2/5 justify-center lg:items-start overflow-y-hidden">
               <h1 className="my-4 text-3xl md:text-5xl text-purple-800 font-bold leading-tight text-center md:text-left slide-in-bottom-h1">
-                Add Connection
+                Add Connections
               </h1>
               <p className="leading-normal text-base md:text-2xl text-gray-700 mb-8 text-center md:text-left slide-in-bottom-subtitle">
-                Add a new connection to your profile to get recommendations.
+                Add a new connection to your profile to get recommendations. Ask your connection for their connection
+                code!
               </p>
+              <SearchBox searchValue={searchValue} setSearchValue={setSearchValue} />
+              {searchValue === users[1].app_metadata.connection_code && (
+                <>
+                  <div className="p-4 my-4 rounded-lg shadow border-gray-300 border flex">
+                    <img src={users[1].picture} className="rounded-full" height="48px" width="48px" alt=""></img>
+                    <p className="pl-4 my-auto">{users[0].email}</p>
+                  </div>
+                </>
+              )}
+              {searchValue === users[0].app_metadata.connection_code && (
+                <>
+                  <div className="p-4 my-4 rounded-lg shadow border-gray-300 border flex">
+                    <img src={users[0].picture} className="rounded-full" height="48px" width="48px" alt=""></img>
+                    <p className="pl-4 my-auto">{users[0].email}</p>
+                  </div>
+                </>
+              )}
             </div>
           </div>
         </>

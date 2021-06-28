@@ -9,7 +9,6 @@ module.exports = {
         dns: 'empty'
       }
     }
-
     return config
   }
 }

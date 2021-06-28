@@ -29,7 +29,7 @@ const Menu = () => {
 
       <div
         id="sortboxmenu"
-        className="absolute right-1 top-full min-w-max shadow rounded opacity-0 bg-gray-300 border border-gray-400 transition delay-75 ease-in-out z-10">
+        className="absolute right-1 top-full min-w-max shadow rounded opacity-0 bg-gray-300 border border-gray-400 transition delay-75 ease-in-out z-10 invisible">
         <div
           className="absolute right-0 w-56 mt-2 origin-top-right bg-white border border-gray-200 divide-y divide-gray-100 rounded-md shadow-lg outline-none"
           aria-labelledby="headlessui-menu-button-1"

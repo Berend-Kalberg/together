@@ -17,11 +17,15 @@ const Nav = () => {
         </Link>
 
         <div className="flex w-1/2 justify-end content-center">
-          <a
-            className="inline-block text-blue-300 font-bold no-underline hover:text-indigo-800 hover:text-underline text-center h-10 p-2 md:h-auto md:p-4"
-            href="/recommender">
-            Recommender
-          </a>
+          {user && (
+            <>
+              <a
+                className="inline-block text-blue-300 font-bold no-underline hover:text-indigo-800 hover:text-underline text-center h-10 p-2 md:h-auto md:p-4"
+                href="/recommender">
+                Recommender
+              </a>
+            </>
+          )}
           <a
             target="_blank"
             className="inline-block text-blue-300 no-underline hover:text-indigo-800 hover:text-underline text-center h-10 p-2 md:h-auto md:p-4"

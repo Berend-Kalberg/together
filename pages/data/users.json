@@ -1,0 +1,57 @@
+[
+  {
+    "created_at": "2021-06-11T12:31:58.047Z",
+    "email": "berend.kalberg@hotmail.com",
+    "email_verified": true,
+    "identities": [
+      {
+        "connection": "Username-Password-Authentication",
+        "provider": "auth0",
+        "user_id": "60c357be2926b90069ed7228",
+        "isSocial": false
+      }
+    ],
+    "name": "berend.kalberg@hotmail.com",
+    "nickname": "berend.kalberg",
+    "picture": "https://s.gravatar.com/avatar/d754e25b3105d60e71f794da79ef7d99?s=480&r=pg&d=https%3A%2F%2Fcdn.auth0.com%2Favatars%2Fbe.png",
+    "updated_at": "2021-06-15T19:35:02.655Z",
+    "user_id": "auth0|60c357be2926b90069ed7228",
+    "username": "berend-kalberg",
+    "app_metadata": {
+      "connection_code": "kEBNOGCvX"
+    },
+    "last_ip": "185.70.236.132",
+    "last_login": "2021-06-15T19:35:02.655Z",
+    "logins_count": 3,
+    "blocked_for": [],
+    "guardian_authenticators": []
+  },
+  {
+    "created_at": "2021-06-03T18:51:09.187Z",
+    "email": "berend.kalberg@gmail.com",
+    "email_verified": true,
+    "given_name": "Berend",
+    "identities": [
+      {
+        "provider": "google-oauth2",
+        "user_id": "113573511922041386667",
+        "connection": "google-oauth2",
+        "isSocial": true
+      }
+    ],
+    "locale": "nl",
+    "name": "Berend",
+    "nickname": "berend.kalberg",
+    "picture": "https://lh3.googleusercontent.com/a-/AOh14GjqGN_R9MFCDuu1CbZLpkqBhsRoKDxDXZT8zUv50g=s96-c",
+    "updated_at": "2021-06-15T10:38:22.499Z",
+    "user_id": "google-oauth2|113573511922041386667",
+    "app_metadata": {
+      "connection_code": "4N5sGNhc1"
+    },
+    "last_ip": "185.70.236.132",
+    "last_login": "2021-06-15T10:38:22.499Z",
+    "logins_count": 14,
+    "blocked_for": [],
+    "guardian_authenticators": []
+  }
+]

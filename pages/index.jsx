@@ -9,7 +9,7 @@ export default function Index() {
             Do more. Together
           </h1>
           <p className="leading-normal text-base md:text-2xl text-gray-700 mb-8 text-center md:text-left slide-in-bottom-subtitle">
-            Create your own profile and select some movies. Add a connection and see new recommendations!
+            Create your very own profile and select some movies that you enjoyed. Add a new connection on  your profile page and see new recommendations in the Recommender!
           </p>
         </div>
         <div className="w-full xl:w-3/5 py-6 overflow-y-hidden">

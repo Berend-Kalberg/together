@@ -11,8 +11,11 @@ import RemoveFavourites from '../components/RemoveFavourite';
 function Recommender() {
   const { user, isLoading } = useUser();
 
+  console.log(user);
+
   const [movies, setMovies] = useState([]);
   const [favourites, setFavourites] = useState([]);
+  const [recommendations, setRecommendations] = useState([]);
   const [searchValue, setSearchValue] = useState('');
 
   const getMovieRequest = async searchValue => {
@@ -43,15 +46,40 @@ function Recommender() {
 
           const finalArray = responseJson.results.filter(n => !filteredArray.includes(n));
 
-          setMovies(finalArray.sort(compare).slice(0, 9))
-          console.log(finalArray.sort(compare).slice(0, 9))
+          setMovies(finalArray.sort(compare).slice(0, 9));
+          console.log(finalArray.sort(compare).slice(0, 9));
         } else {
-          setMovies(responseJson.results.sort(compare).slice(0, 9))
-          console.log(responseJson.results.sort(compare).slice(0, 9))
+          setMovies(responseJson.results.sort(compare).slice(0, 9));
+          console.log(responseJson.results.sort(compare).slice(0, 9));
         }
+      }
+    } else {
+      setMovies([]);
+    }
+  };
+
+  const getRecommendationRequest = async recommendation => {
+    const url = `https://api.themoviedb.org/3/movie/${recommendation}/recommendations?api_key=de5a154b0b354502d8441ebf5607e1b7&language=en-US&page=1`;
+
+    if (recommendation && recommendations.length <= 1) {
+      const response = await fetch(url);
+      const responseJson = await response.json();
+
+      if (responseJson.results) {
+        console.log(responseJson.results);
+        setRecommendations(responseJson.results.slice(0, 18));
+      } else {
+        setRecommendations([]);
       }
     }
   };
+
+  console.log(favourites);
+
+  if (favourites.length >= 1) {
+    const recommendation = favourites[Math.floor(Math.random() * favourites.length)];
+    getRecommendationRequest(recommendation.id);
+  }
 
   useEffect(() => {
     getMovieRequest(searchValue);
@@ -72,25 +100,12 @@ function Recommender() {
   const addFavouriteMovie = movie => {
     const newFavouriteList = [...favourites, movie];
 
-    console.log(movie);
-
-    console.log(favourites);
-
-    console.log(newFavouriteList);
-
-    // new.forEach(element => {
-
-    // });
-
     if (!favourites.includes(movie)) {
       setFavourites(newFavouriteList);
       saveToLocalStorage(newFavouriteList);
       console.log(newFavouriteList);
-    } else {
-      console.log('movie already included in list');
     }
   };
-
   const removeFavouriteMovie = movie => {
     const newFavouriteList = favourites.filter(favourite => favourite.id !== movie.id);
 
@@ -103,14 +118,13 @@ function Recommender() {
       {isLoading && <Loading />}
       {user && (
         <>
-          <div className="">
-            <div className="">
+          <div>
+            <div>
               <h1 className="my-4 text-3xl md:text-5xl text-purple-800 font-bold leading-tight text-center md:text-left slide-in-bottom-h1">
                 Recommender
               </h1>
               <SearchBox searchValue={searchValue} setSearchValue={setSearchValue} />
-              <MovieListHeading heading="Movies" />
-              <div className="content-start">
+              <div>
                 <MovieList
                   movies={movies}
                   handleFavouritesClick={addFavouriteMovie}
@@ -118,15 +132,29 @@ function Recommender() {
                 />
               </div>
               <div className="row d-flex align-items-center mt-4 mb-4">
-                <MovieListHeading heading="List" />
+                <MovieListHeading heading="Your collection" />
               </div>
-              <div className="content-start">
+              <div>
                 <MovieList
                   movies={favourites}
                   handleFavouritesClick={removeFavouriteMovie}
                   favouriteComponent={RemoveFavourites}
                 />
               </div>
+              {favourites.length >= 1 && (
+                <>
+                  <div className="row d-flex align-items-center mt-4 mb-4">
+                    <MovieListHeading heading="Your Recommendations" />
+                  </div>
+                  <div>
+                    <MovieList
+                      movies={recommendations}
+                      handleFavouritesClick={addFavouriteMovie}
+                      favouriteComponent={AddFavourites}
+                    />
+                  </div>
+                </>
+              )}
             </div>
           </div>
         </>

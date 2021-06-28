@@ -3,7 +3,7 @@ import { DebounceInput } from 'react-debounce-input';
 
 const SearchBox = props => {
   return (
-    <div className="px-0 lg:w-3/4 sm:w-3/4 md:w-1/2 lg:flex mx-auto block border hover:border-indigo-400 mt-20 rounded-lg">
+    <div className="px-0 lg:w-3/4 sm:w-3/4 md:w-1/2 lg:flex sm:mx-auto md:mx-0 block border hover:border-indigo-400 mt-20 rounded-lg">
       <DebounceInput
         minLength={0}
         debounceTimeout={1000}
